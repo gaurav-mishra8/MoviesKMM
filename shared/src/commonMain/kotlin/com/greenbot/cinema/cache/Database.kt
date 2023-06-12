@@ -17,11 +17,27 @@ internal class Database(databaseDriverFactory: DatabaseDriverFactory) {
         return dbQuery.selectAllMovies(::mapToMotionPicture).executeAsList()
     }
 
-    private fun mapToMotionPicture(id: String, title: String?, overview: String?): MotionPicture {
+    private fun mapToMotionPicture(id: Long, title: String?, overview: String?): MotionPicture {
         return MotionPicture(
-            id = id,
+            id = id.toInt(),
             title = title ?: "",
             overview = overview ?: ""
+        )
+    }
+
+    internal fun insertMovies(motionPicture: List<MotionPicture>) {
+        dbQuery.transaction {
+            motionPicture.forEach {
+                insertMotionPicture(it)
+            }
+        }
+    }
+
+    private fun insertMotionPicture(motionPicture: MotionPicture) {
+        dbQuery.insertMovie(
+            id = motionPicture.id.toLong(),
+            title = motionPicture.title,
+            overview = motionPicture.overview
         )
     }
 }
