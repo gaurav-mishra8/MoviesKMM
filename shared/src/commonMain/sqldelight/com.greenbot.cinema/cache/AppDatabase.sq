@@ -1,0 +1,15 @@
+CREATE TABLE Movie (
+  id TEXT NOT NULL,
+  title TEXT,
+  overview TEXT
+);
+
+insertMovie:
+INSERT INTO Movie(id, title, overview)
+VALUES(?,?,?);
+
+removeAllMovies:
+DELETE FROM Movie;
+
+selectAllMovies:
+SELECT Movie.* FROM Movie;
