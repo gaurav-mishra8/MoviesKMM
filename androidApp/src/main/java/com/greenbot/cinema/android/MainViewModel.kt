@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
-import com.greenbot.cinema.MoviesSDK
+import com.greenbot.cinema.MoviesRepositoryImpl
 import com.greenbot.cinema.cache.DatabaseDriverFactory
 import com.greenbot.cinema.entity.MotionPicture
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,8 +21,9 @@ data class MovieUiState(
     val movies: List<MotionPicture> = emptyList()
 )
 
+@Suppress("UNCHECKED_CAST")
 class MainViewModel(
-    private val moviesSDK: MoviesSDK,
+    private val moviesRepositoryImpl: MoviesRepositoryImpl,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -35,7 +36,7 @@ class MainViewModel(
             _uiState.value = _uiState.value.copy(isLoading = true)
 
             try {
-                val movies = moviesSDK.getPopularMovies(false)
+                val movies = moviesRepositoryImpl.getPopularMovies(false)
                 _uiState.value =
                     _uiState.value.copy(isLoading = false, error = null, movies = movies)
             } catch (e: Exception) {
@@ -51,11 +52,10 @@ class MainViewModel(
             override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
                 val application = checkNotNull(extras[APPLICATION_KEY])
                 val savedStateHandle = extras.createSavedStateHandle()
-                val moviesSdk = MoviesSDK(DatabaseDriverFactory(application.applicationContext))
-                return MainViewModel(moviesSdk, savedStateHandle) as T
+                val moviesRepositoryImpl =
+                    MoviesRepositoryImpl(DatabaseDriverFactory(application.applicationContext))
+                return MainViewModel(moviesRepositoryImpl, savedStateHandle) as T
             }
         }
     }
-
-
 }
