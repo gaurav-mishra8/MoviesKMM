@@ -1,4 +1,4 @@
-package com.greenbot.cinema
+package com.greenbot.movieskmm
 
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.native.NativeSqliteDriver

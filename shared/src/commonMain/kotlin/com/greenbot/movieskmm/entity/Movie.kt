@@ -1,21 +1,20 @@
-package com.greenbot.cinema.entity
+package com.greenbot.movieskmm.entity
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 @Serializable
-data class MotionPictureResponse(
+data class MovieResponse(
     @SerialName("page")
     val page: Int,
     @SerialName("results")
-    val results: List<MotionPicture>,
+    val results: List<Movie>,
     @SerialName("total_pages")
     val totalPages: Int
 )
 
 @Serializable
-data class MotionPicture(
+data class Movie(
     @SerialName("id")
     val id: Int,
     @SerialName("title")

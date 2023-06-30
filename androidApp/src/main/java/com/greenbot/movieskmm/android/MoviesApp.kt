@@ -1,18 +1,18 @@
-package com.greenbot.cinema.android
+package com.greenbot.movieskmm.android
 
 import android.app.Application
-import com.greenbot.cinema.android.di.appModule
+import com.greenbot.movieskmm.android.di.appModule
 import initKoin
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 
-class CinemaApp : Application() {
+class MoviesApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
         initKoin {
             androidLogger()
-            androidContext(this@CinemaApp)
+            androidContext(this@MoviesApp)
             modules(appModule)
         }
     }

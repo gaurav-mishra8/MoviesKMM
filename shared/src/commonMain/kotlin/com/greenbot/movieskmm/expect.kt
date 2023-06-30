@@ -1,4 +1,4 @@
-package com.greenbot.cinema
+package com.greenbot.movieskmm
 
 import org.koin.core.module.Module
 

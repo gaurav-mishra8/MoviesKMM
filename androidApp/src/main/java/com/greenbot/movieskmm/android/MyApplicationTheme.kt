@@ -1,4 +1,4 @@
-package com.greenbot.cinema.android
+package com.greenbot.movieskmm.android
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape

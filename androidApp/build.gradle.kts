@@ -4,10 +4,10 @@ plugins {
 }
 
 android {
-    namespace = "com.greenbot.cinema.android"
+    namespace = "com.greenbot.movieskmm.android"
     compileSdk = 33
     defaultConfig {
-        applicationId = "com.greenbot.cinema.android"
+        applicationId = "com.greenbot.movieskmm.android"
         minSdk = 24
         targetSdk = 33
         versionCode = 1

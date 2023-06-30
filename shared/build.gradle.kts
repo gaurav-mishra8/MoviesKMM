@@ -95,7 +95,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.greenbot.cinema"
+    namespace = "com.greenbot.movieskmm"
     compileSdk = 33
     defaultConfig {
         minSdk = 24
@@ -106,7 +106,7 @@ android {
 sqldelight {
     databases {
         create("AppDatabase") {
-            packageName.set("com.greenbot.cinema")
+            packageName.set("com.greenbot.movieskmm")
         }
     }
 }

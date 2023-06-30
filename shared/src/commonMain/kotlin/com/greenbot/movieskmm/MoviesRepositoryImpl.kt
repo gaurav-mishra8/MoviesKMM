@@ -1,13 +1,13 @@
-package com.greenbot.cinema
+package com.greenbot.movieskmm
 
 import app.cash.sqldelight.db.SqlDriver
-import com.greenbot.cinema.cache.Database
-import com.greenbot.cinema.entity.MotionPicture
-import com.greenbot.cinema.network.MoviesApi
+import com.greenbot.movieskmm.cache.Database
+import com.greenbot.movieskmm.entity.Movie
+import com.greenbot.movieskmm.network.MoviesApi
 import org.koin.core.component.KoinComponent
 
 interface MoviesRepository {
-    suspend fun getPopularMovies(forceLoad: Boolean): List<MotionPicture>
+    suspend fun getPopularMovies(forceLoad: Boolean): List<Movie>
 }
 
 class MoviesRepositoryImpl(
@@ -17,7 +17,7 @@ class MoviesRepositoryImpl(
     MoviesRepository {
     private val database = Database(sqlDriver)
 
-    override suspend fun getPopularMovies(forceLoad: Boolean): List<MotionPicture> {
+    override suspend fun getPopularMovies(forceLoad: Boolean): List<Movie> {
         val cachedMovies = database.getAllMovies()
         return if (cachedMovies.isEmpty() || forceLoad) {
             api.getAllMovies().also {

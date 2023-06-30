@@ -1,7 +1,7 @@
-import com.greenbot.cinema.MoviesRepository
-import com.greenbot.cinema.MoviesRepositoryImpl
-import com.greenbot.cinema.network.MoviesApi
-import com.greenbot.cinema.platformModule
+import com.greenbot.movieskmm.MoviesRepository
+import com.greenbot.movieskmm.MoviesRepositoryImpl
+import com.greenbot.movieskmm.network.MoviesApi
+import com.greenbot.movieskmm.platformModule
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -26,7 +26,7 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
 
 fun commonModule() = module {
     single { createJson() }
-    single { createHttpClient(get(), get(), false) }
+    single { createHttpClient(get(), get(), enableNetworkLogs = true) }
     single { CoroutineScope(Dispatchers.Default + SupervisorJob()) }
     single<MoviesRepository> { MoviesRepositoryImpl(get(), get()) }
     single { MoviesApi(get()) }
