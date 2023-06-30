@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.viewModelFactory
+import org.koin.androidx.compose.getViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +35,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MoviesScreen(
-    mainViewModel: MainViewModel = viewModel(factory = MainViewModel.Factory)
+    mainViewModel: MainViewModel = getViewModel()
 ) {
     val state by mainViewModel.uiState.collectAsState()
     LaunchedEffect(true) {

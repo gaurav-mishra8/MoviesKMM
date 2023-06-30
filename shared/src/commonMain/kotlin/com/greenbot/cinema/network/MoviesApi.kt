@@ -8,16 +8,9 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import org.koin.core.component.KoinComponent
 
-class MoviesApi {
-    private val httpClient = HttpClient {
-        install(ContentNegotiation) {
-            json(Json {
-                ignoreUnknownKeys = true
-                useAlternativeNames = false
-            })
-        }
-    }
+class MoviesApi(private val httpClient: HttpClient) : KoinComponent {
 
     suspend fun getAllMovies(): List<MotionPicture> {
         val response =

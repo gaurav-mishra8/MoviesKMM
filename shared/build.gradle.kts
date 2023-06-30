@@ -13,7 +13,7 @@ kotlin {
             }
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -33,10 +33,19 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
-                implementation("io.ktor:ktor-client-core:$ktorVersion")
-                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:$dateTimeVersion")
+                with(Deps.Koin) {
+                    api(core)
+                    api(test)
+                }
+                with(Deps.Ktor) {
+                    implementation(clientCore)
+                    implementation(clientJson)
+                    implementation(clientLogging)
+                    implementation(clientSerialization)
+                    implementation(contentNegotiation)
+                    implementation(json)
+                }
             }
         }
         val commonTest by getting {
@@ -46,7 +55,13 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-android:$ktorVersion")
+                with(Deps.Ktor) {
+                    implementation(clientAndroid)
+                }
+                with(Deps.Koin) {
+                    implementation(core)
+                    implementation(android)
+                }
                 implementation("app.cash.sqldelight:android-driver:$sqlDelightVersion")
             }
         }
@@ -61,7 +76,9 @@ kotlin {
             iosSimulatorArm64Main.dependsOn(this)
 
             dependencies {
-                implementation("io.ktor:ktor-client-darwin:$ktorVersion")
+                with(Deps.Ktor) {
+                    implementation(Deps.Ktor.clientDarwin)
+                }
                 implementation("app.cash.sqldelight:native-driver:$sqlDelightVersion")
             }
         }

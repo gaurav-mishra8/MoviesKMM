@@ -1,10 +1,11 @@
 package com.greenbot.cinema.cache
 
+import app.cash.sqldelight.db.SqlDriver
 import com.greenbot.cinema.AppDatabase
 import com.greenbot.cinema.entity.MotionPicture
 
-internal class Database(databaseDriverFactory: DatabaseDriverFactory) {
-    private val database = AppDatabase(databaseDriverFactory.createDriver())
+internal class Database(driver: SqlDriver) {
+    private val database = AppDatabase(driver)
     private val dbQuery = database.appDatabaseQueries
 
     internal fun clearDatabase() {
