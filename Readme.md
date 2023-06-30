@@ -7,8 +7,8 @@ In Development
 
 # Libraries
 
-*Ktor* - Networking
-*Koin* - Dependency Injection
-*SqlDelight* - Database
-*Coroutines* - Concurrency
-*Jetpack Compose* - Android UI
+**Ktor** - Networking\
+**Koin** - Dependency Injection\
+**SqlDelight** - Database\
+**Coroutines** - Concurrency\
+**Jetpack Compose** - Android UI
