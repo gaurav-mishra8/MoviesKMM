@@ -18,11 +18,19 @@ internal class Database(driver: SqlDriver) {
         return dbQuery.selectAllMovies(::mapEntity).executeAsList()
     }
 
-    private fun mapEntity(id: Long, title: String?, overview: String?): Movie {
+    private fun mapEntity(
+        id: Long,
+        title: String?,
+        overview: String?,
+        posterPath: String?,
+        backDropPath: String?
+    ): Movie {
         return Movie(
             id = id.toInt(),
             title = title ?: "",
-            overview = overview ?: ""
+            overview = overview ?: "",
+            posterPath = posterPath ?: "",
+            backDropPath = backDropPath ?: ""
         )
     }
 
@@ -38,7 +46,9 @@ internal class Database(driver: SqlDriver) {
         dbQuery.insertMovie(
             id = movie.id.toLong(),
             title = movie.title,
-            overview = movie.overview
+            overview = movie.overview,
+            posterPath = movie.img,
+            backDropPath = movie.backgroundImg
         )
     }
 }

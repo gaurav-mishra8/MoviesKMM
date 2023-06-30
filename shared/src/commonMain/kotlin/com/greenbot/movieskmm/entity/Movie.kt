@@ -20,5 +20,16 @@ data class Movie(
     @SerialName("title")
     val title: String,
     @SerialName("overview")
-    val overview: String
-)
+    val overview: String,
+    @SerialName("poster_path")
+    private val posterPath: String,
+    @SerialName("backdrop_path")
+    private val backDropPath: String
+) {
+    val img
+        get() = "$IMAGE_BASE_URL/$posterPath"
+    val backgroundImg
+        get() = "$IMAGE_BASE_URL/$backDropPath"
+}
+
+const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/original"

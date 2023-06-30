@@ -1,4 +1,4 @@
-package com.greenbot.movieskmm.android
+package com.greenbot.movieskmm.android.ui
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -25,7 +25,7 @@ class MainViewModel(
 
     val uiState: StateFlow<MovieUiState> get() = _uiState
 
-    fun getMovies() {
+    fun getPopularMovies() {
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(isLoading = true)
 

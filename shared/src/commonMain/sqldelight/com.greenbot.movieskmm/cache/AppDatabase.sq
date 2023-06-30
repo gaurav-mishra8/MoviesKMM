@@ -1,12 +1,14 @@
 CREATE TABLE Movie (
   id INTEGER NOT NULL,
   title TEXT,
-  overview TEXT
+  overview TEXT,
+  posterPath TEXT,
+  backDropPath TEXT
 );
 
 insertMovie:
-INSERT INTO Movie(id, title, overview)
-VALUES(?,?,?);
+INSERT INTO Movie(id, title, overview, posterPath, backDropPath)
+VALUES(?,?,?,?,?);
 
 removeAllMovies:
 DELETE FROM Movie;

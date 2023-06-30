@@ -5,11 +5,13 @@
 
     <application
         android:name=".MoviesApp"
+        android:label="@string/movies_app_name"
         android:allowBackup="false"
+        android:icon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
