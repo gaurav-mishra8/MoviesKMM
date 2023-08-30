@@ -1,22 +1,20 @@
 package com.greenbot.movieskmm
 
-import app.cash.sqldelight.db.SqlDriver
 import com.greenbot.movieskmm.cache.Database
+import com.greenbot.movieskmm.cache.DatabaseDriverFactory
 import com.greenbot.movieskmm.entity.Movie
 import com.greenbot.movieskmm.network.MoviesApi
 import kotlinx.coroutines.delay
-import org.koin.core.component.KoinComponent
 
 interface MoviesRepository {
     suspend fun getPopularMovies(forceLoad: Boolean): List<Movie>
 }
 
 class MoviesRepositoryImpl(
-    private val api: MoviesApi,
-    sqlDriver: SqlDriver
-) : KoinComponent,
-    MoviesRepository {
-    private val database = Database(sqlDriver)
+    databaseDriverFactory: DatabaseDriverFactory
+) : MoviesRepository {
+    private val database = Database(databaseDriverFactory.createDriver())
+    private val api = MoviesApi()
 
     override suspend fun getPopularMovies(forceLoad: Boolean): List<Movie> {
         val cachedMovies = database.getAllMovies()

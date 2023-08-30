@@ -3,6 +3,7 @@ package com.greenbot.movieskmm.android.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -31,15 +32,20 @@ import com.greenbot.movieskmm.android.MyApplicationTheme
 import org.koin.androidx.compose.getViewModel
 
 class MainActivity : ComponentActivity() {
+
+    private val viewModel: MovieViewModel by viewModels { MovieViewModel.Factory }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         setContent {
             MyApplicationTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MoviesScreen()
+                    MoviesScreen(viewModel)
                 }
             }
         }
@@ -48,7 +54,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MoviesScreen(
-    mainViewModel: MainViewModel = getViewModel()
+    mainViewModel: MovieViewModel
 ) {
     val state by mainViewModel.uiState.collectAsState()
     LaunchedEffect(true) {
