@@ -24,13 +24,12 @@ struct MoviesListScreen: View {
                 ForEach(viewModel.movies, id: \.self.id) {movie in
                     MovieItem(movie: movie)
                 }
-            }.onAppear{
-                viewModel.loadMovies()
             }
             .listStyle(.plain)
             
         }.onAppear {
             viewModel.setRepo(moviesRepository:moviesRepository)
+            viewModel.loadMovies()
         }
     }
 }

@@ -14,17 +14,24 @@ struct MovieItem: View {
     
     var body: some View {
         VStack(alignment: .leading){
+            
+            if #available(iOS 15.0, *) {
+                AsyncImage(url: URL(string:movie.img))
+                    .frame(width: 500, height: 200)
+                      .mask(RoundedRectangle(cornerRadius: 16))
+            } else {
+                // Fallback on earlier versions
+            }
+            
+            Spacer()
+            
             Text(movie.title)
                 .font(.body)
                 .fontWeight(.medium)
                 .padding(.bottom, 3)
             
             Spacer()
-            
-            Text(movie.overview)
-                .font(.body)
-                .fontWeight(.medium)
-                .padding(.bottom, 3)
+
         }
     }
 }

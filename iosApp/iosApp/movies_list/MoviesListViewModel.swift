@@ -24,7 +24,9 @@ extension MoviesListScreen {
             print("loading movies start")
             moviesRepository?.getPopularMovies(forceLoad: false, completionHandler: { movies, error in
                 print("fetched movies")
-                self.movies = movies ?? []
+                DispatchQueue.main.async {
+                    self.movies = movies ?? []
+                }
             })
             print("loading movies end")
         }
