@@ -1,7 +1,8 @@
-package com.greenbot.movieskmm
+package com.greenbot.movieskmm.cache
 
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.native.NativeSqliteDriver
+import com.greenbot.movieskmm.AppDatabase
 
 actual class DatabaseDriverFactory {
     actual fun createDriver(): SqlDriver {
