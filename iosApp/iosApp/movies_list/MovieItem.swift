@@ -8,36 +8,29 @@
 
 import SwiftUI
 import shared
+import SDWebImageSwiftUI
 
 struct MovieItem: View {
-    var movie : Movie
-    
+    var movie: Movie
+
     var body: some View {
-        VStack(alignment: .leading){
-            
-            if #available(iOS 15.0, *) {
-                AsyncImage(url: URL(string:movie.img))
-                    .frame(width: 500, height: 200)
-                      .mask(RoundedRectangle(cornerRadius: 16))
-            } else {
-                // Fallback on earlier versions
-            }
-            
+        VStack(alignment: .center) {
+            WebImage(url: URL(string: movie.img))
+                .resizable()
+                .placeholder {
+                    ProgressView()
+                }
+                .indicator(.activity)
+                .transition(.fade)
+                .scaledToFit()
+                .cornerRadius(20)
             Spacer()
-            
+
             Text(movie.title)
                 .font(.body)
                 .fontWeight(.medium)
                 .padding(.bottom, 3)
-            
             Spacer()
-
         }
-    }
-}
-
-struct MovieItem_Previews: PreviewProvider {
-    static var previews: some View {
-        EmptyView()
     }
 }

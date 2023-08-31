@@ -10,32 +10,22 @@ import SwiftUI
 import shared
 
 struct MoviesListScreen: View {
-    private var moviesRepository : MoviesRepositoryImpl
-    @StateObject var viewModel = MoviesListViewModel(moviesRepository: nil)
+    @StateObject private var viewModel: MoviesListViewModel
     
-    init(moviesRepository : MoviesRepositoryImpl) {
-        self.moviesRepository = moviesRepository
-        
+    init(moviesRepository: MoviesRepositoryImpl) {
+        self._viewModel = StateObject(wrappedValue: MoviesListViewModel(moviesRepository: moviesRepository))
     }
     
     var body: some View {
-        VStack {
-            List {
-                ForEach(viewModel.movies, id: \.self.id) {movie in
-                    MovieItem(movie: movie)
-                }
+        VStack() {
+            List(viewModel.movies, id: \.id) { movie in
+                MovieItem(movie: movie)
             }
             .listStyle(.plain)
-            
-        }.onAppear {
-            viewModel.setRepo(moviesRepository:moviesRepository)
+        }
+        .navigationTitle("Trending Movies")
+        .onAppear {
             viewModel.loadMovies()
         }
-    }
-}
-
-struct MoviesListScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        EmptyView()
     }
 }
